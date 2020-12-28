@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>class总结 | 人心不古</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="什么是class？、他是怎么来的？JavaScript 语言中，生成实例对象的传统方法是通过构造函数。下面是一个例子。
+function Point(x, y) {  this.x = x;  this.y = y;}Point.prototype.toString = function () { ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="class总结"/>
+  <meta property="og:site_name" content="人心不古"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="人心不古" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">人心不古</a><span class="split"></span><span class="title">class总结</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2020-12-28</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>什么是class？、<br>他是怎么来的？<br>JavaScript 语言中，生成实例对象的传统方法是通过构造函数。下面是一个例子。</p>
+<p>function Point(x, y) {<br>  this.x = x;<br>  this.y = y;<br>}<br>Point.prototype.toString = function () {<br>  return ‘(‘ + this.x + ‘, ‘ + this.y + ‘)’;<br>};<br>var p = new Point(1, 2);<br>这种写法跟传统的面向对象语言比如 C++ 和 Java差异很是大的</p>
+<p>上面的代码用es6改写的class写法如下<br>class Point {<br>  constructor(x, y) {<br>    this.x = x;<br>    this.y = y;<br>  }</p>
+<p>  toString() {<br>    return ‘(‘ + this.x + ‘, ‘ + this.y + ‘)’;<br>  }<br>}</p>
+<p>上面代码定义了一个“类”，可以看到里面有一个constructor()方法，这就是构造方法，而this关键字则代表实例对象。这种新的 Class 写法，本质上与本章开头的 ES5 的构造函数Point是一致的。</p>
+<p>Point类除了构造方法，还定义了一个toString()方法。注意，定义toString()方法的时候，前面不需要加上function这个关键字，直接把函数定义放进去了就可以了。另外，方法与方法之间不需要逗号分隔，加了会报错。</p>
+<p>ES6 的类，完全可以看作构造函数的另一种写法。<br>class Point {<br>  // …<br>}<br>typeof Point // “function”<br>Point === Point.prototype.constructor // true<br>类的数据类型就是函数，类本身就指向构造函数。使用的时候，也是直接对类使用new命令，跟构造函数的用法完全一致。<br>class Bar {<br>  doStuff() {<br>    console.log(‘stuff’);<br>  }<br>}<br>const b = new Bar();<br>b.doStuff() // “stuff”<br>构造函数的prototype属性，在 ES6 的“类”上面继续存在。事实上，类的所有方法都定义在类的prototype属性上面。<br>class Point {<br>  constructor() {<br>    // …<br>  }</p>
+<p>  toString() {<br>    // …<br>  }</p>
+<p>  toValue() {<br>    // …<br>  }<br>}<br>// 等同于<br>Point.prototype = {<br>  constructor() {},<br>  toString() {},<br>  toValue() {},<br>};</p>
+<p>因此，在类的实例上面调用方法，其实就是调用原型上的方法。<br>class B {}<br>const b = new B();</p>
+<p>b.constructor === B.prototype.constructor // true<br>b是B类的实例，它的constructor()方法就是B类原型的constructor()方法。</p>
+<p>由于类的方法都定义在prototype对象上面，所以类的新方法可以添加在prototype对象上面。Object.assign()方法可以很方便地一次向类添加多个方法。<br>class Point {<br>  constructor(){<br>    // …<br>  }<br>}</p>
+<p>Object.assign(Point.prototype, {<br>  toString(){},<br>  toValue(){}<br>});<br>prototype对象的constructor()属性，直接指向“类”的本身，这与 ES5 的行为是一致的。<br>Point.prototype.constructor === Point // true</p>
+<p>constructor 方法<br>constructor()方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor()方法，如果没有显式定义，一个空的constructor()方法会被默认添加。</p>
+<p>class Point {<br>}</p>
+<p>// 等同于<br>class Point {<br>  constructor() {}<br>}</p>
+<p>类的实例<br>生成类的实例的写法，与 ES5 完全一样，也是使用new命令。如果忘记加上new，像函数那样调用Class，将会报错。</p>
+<p>class Point {<br>  // …<br>}</p>
+<p>// 报错<br>var point = Point(2, 3);</p>
+<p>// 正确<br>var point = new Point(2, 3);</p>
+<p>与 ES5 一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）。</p>
+<p>//定义类<br>class Point {<br>  constructor(x, y) {<br>    this.x = x;<br>    this.y = y;<br>  }<br>  toString() {<br>    return ‘(‘ + this.x + ‘, ‘ + this.y + ‘)’;<br>  }<br>}<br>var point = new Point(2, 3);<br>point.toString() // (2, 3)<br>point.hasOwnProperty(‘x’) // true<br>point.hasOwnProperty(‘y’) // true<br>point.hasOwnProperty(‘toString’) // false<br>point.<strong>proto</strong>.hasOwnProperty(‘toString’) // true</p>
+<p>与 ES5 一样，类的所有实例共享一个原型对象。<br>var p1 = new Point(2,3);<br>var p2 = new Point(3,2);</p>
+<p>p1.<strong>proto</strong> === p2.<strong>proto</strong><br>//true<br>上面代码中，p1和p2都是Point的实例，它们的原型都是Point.prototype，所以__proto__属性是相等的。</p>
+<p>这也意味着，可以通过实例的__proto__属性为“类”添加方法。</p>
+<p><strong>proto</strong> 并不是语言本身的特性，这是各大厂商具体实现时添加的私有属性，虽然目前很多现代浏览器的 JS 引擎中都提供了这个私有属性，但依旧不建议在生产中使用该属性，避免对环境产生依赖。生产环境中，我们可以使用 Object.getPrototypeOf 方法来获取实例对象的原型，然后再来为原型添加方法/属性。</p>
+<p>var p1 = new Point(2,3);<br>var p2 = new Point(3,2);</p>
+<p>p1.<strong>proto</strong>.printName = function () { return ‘Oops’ };</p>
+<p>p1.printName() // “Oops”<br>p2.printName() // “Oops”</p>
+<p>var p3 = new Point(4,2);<br>p3.printName() // “Oops”<br>上面代码在p1的原型上添加了一个printName()方法，由于p1的原型就是p2的原型，因此p2也可以调用这个方法。而且，此后新建的实例p3也可以调用这个方法。这意味着，使用实例的__proto__属性改写原型，必须相当谨慎，不推荐使用，因为这会改变“类”的原始定义，影响到所有实例。<br>取值函数（getter）和存值函数（setter）<br>与 ES5 一样，在“类”的内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。</p>
+<p>class MyClass {<br>  constructor() {<br>    // …<br>  }<br>  get prop() {<br>    return ‘getter’;<br>  }<br>  set prop(value) {<br>    console.log(‘setter: ‘+value);<br>  }<br>}</p>
+<p>let inst = new MyClass();</p>
+<p>inst.prop = 123;<br>// setter: 123</p>
+<p>inst.prop<br>// ‘getter’</p>
+<p>属性表达式<br>类的属性名，可以采用表达式。</p>
+<p>let methodName = ‘getArea’;</p>
+<p>class Square {<br>  constructor(length) {<br>    // …<br>  }</p>
+<p>  <a href="">methodName</a> {<br>    // …<br>  }<br>}<br>Square类的方法名getArea，是从表达式得到的。</p>
+<p>Class 表达式<br>与函数一样，类也可以使用表达式的形式定义。</p>
+<p>const MyClass = class Me {<br>  getClassName() {<br>    return Me.name;<br>  }<br>};<br>上面代码使用表达式定义了一个类。需要注意的是，这个类的名字是Me，但是Me只在 Class 的内部可用，指代当前类。在 Class 外部，这个类只能用MyClass引用。</p>
+<p>采用 Class 表达式，可以写出立即执行的 Class。</p>
+<p>let person = new class {<br>  constructor(name) {<br>    this.name = name;<br>  }</p>
+<p>  sayName() {<br>    console.log(this.name);<br>  }<br>}(‘张三’);</p>
+<p>person.sayName(); // “张三” person是一个立即执行的类的实例</p>
+<p>静态方法<br>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
+<p>class Foo {<br>  static classMethod() {<br>    return ‘hello’;<br>  }<br>}</p>
+<p>Foo.classMethod() // ‘hello’</p>
+<p>var foo = new Foo();<br>foo.classMethod()<br>// TypeError: foo.classMethod is not a function<br>上面代码中，Foo类的classMethod方法前有static关键字，表明该方法是一个静态方法，可以直接在Foo类上调用（Foo.classMethod()），而不是在Foo类的实例上调用。如果在实例上调用静态方法，会抛出一个错误，表示不存在该方法。</p>
+<p>注意，如果静态方法包含this关键字，这个this指的是类，而不是实例。</p>
+<p>class Foo {<br>  static bar() {<br>    this.baz();<br>  }<br>  static baz() {<br>    console.log(‘hello’);<br>  }<br>  baz() {<br>    console.log(‘world’);<br>  }<br>}</p>
+<p>Foo.bar() // hello<br>上面代码中，静态方法bar调用了this.baz，这里的this指的是Foo类，而不是Foo的实例，等同于调用Foo.baz。另外，从这个例子还可以看出，静态方法可以与非静态方法重名。</p>
+<p>父类的静态方法，可以被子类继承。</p>
+<p>class Foo {<br>  static classMethod() {<br>    return ‘hello’;<br>  }<br>}</p>
+<p>class Bar extends Foo {<br>}</p>
+<p>Bar.classMethod() // ‘hello’<br>上面代码中，父类Foo有一个静态方法，子类Bar可以调用这个方法。</p>
+<p>静态方法也是可以从super对象上调用的。</p>
+<p>class Foo {<br>  static classMethod() {<br>    return ‘hello’;<br>  }<br>}</p>
+<p>class Bar extends Foo {<br>  static classMethod() {<br>    return super.classMethod() + ‘, too’;<br>  }<br>}</p>
+<p>Bar.classMethod() // “hello, too”<br>实例属性的新写法<br>实例属性除了定义在constructor()方法里面的this上面，也可以定义在类的最顶层。</p>
+<p>class IncreasingCounter {<br>  constructor() {<br>    this._count = 0;<br>  }<br>  get value() {<br>    console.log(‘Getting the current value!’);<br>    return this._count;<br>  }<br>  increment() {<br>    this._count++;<br>  }<br>}<br>上面代码中，实例属性this._count定义在constructor()方法里面。另一种写法是，这个属性也可以定义在类的最顶层，其他都不变。</p>
+<p>class IncreasingCounter {<br>  _count = 0;<br>  get value() {<br>    console.log(‘Getting the current value!’);<br>    return this._count;<br>  }<br>  increment() {<br>    this._count++;<br>  }<br>}<br>上面代码中，实例属性_count与取值函数value()和increment()方法，处于同一个层级。这时，不需要在实例属性前面加上this。</p>
+<p>这种新写法的好处是，所有实例对象自身的属性都定义在类的头部，看上去比较整齐，一眼就能看出这个类有哪些实例属性。</p>
+<p>class foo {<br>  bar = ‘hello’;<br>  baz = ‘world’;</p>
+<p>  constructor() {<br>    // …<br>  }<br>}<br>上面的代码，一眼就能看出，foo类有两个实例属性，一目了然。另外，写起来也比较简洁。</p>
+<p>静态属性<br>静态属性指的是 Class 本身的属性，即Class.propName，而不是定义在实例对象（this）上的属性。</p>
+<p>class Foo {<br>}</p>
+<p>Foo.prop = 1;<br>Foo.prop // 1<br>上面的写法为Foo类定义了一个静态属性prop。</p>
+<p>目前，只有这种写法可行，因为 ES6 明确规定，Class 内部只有静态方法，没有静态属性。现在有一个提案提供了类的静态属性，写法是在实例属性的前面，加上static关键字。</p>
+<p>class MyClass {<br>  static myStaticProp = 42;</p>
+<p>  constructor() {<br>    console.log(MyClass.myStaticProp); // 42<br>  }<br>}<br>这个新写法大大方便了静态属性的表达。</p>
+<p>// 老写法<br>class Foo {<br>  // …<br>}<br>Foo.prop = 1;</p>
+<p>// 新写法<br>class Foo {<br>  static prop = 1;<br>}<br>上面代码中，老写法的静态属性定义在类的外部。整个类生成以后，再生成静态属性。这样让人很容易忽略这个静态属性，也不符合相关代码应该放在一起的代码组织原则。另外，新写法是显式声明（declarative），而不是赋值处理，语义更好。</p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2020/12/25/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2020 John Doe
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+</html>
