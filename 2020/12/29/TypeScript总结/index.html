@@ -1,67 +1,53 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>TypeScript总结 | 人心不古</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="基础类型?
-为了让程序有价值，我们需要能够处理最简单的数据单元：数字，字符串，结构体，布尔值等。 TypeScript支持与JavaScript几乎相同的数据类型，此外还提供了实用的枚举类型方便我们使用。
-布尔值
-最基本的数据类型就是简单的true/false值，在JavaScript和TypeSc">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="TypeScript总结"/>
-  <meta property="og:site_name" content="人心不古"/>
 
-  
-    <meta property="og:image" content=""/>
-  
+<title>TypeScript总结 | 人心不古</title>
 
-  
-    <link rel="alternative" href="/atom.xml" title="人心不古" type="application/atom+xml">
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-  
-  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
-  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" href="/styles/main.css">
 
-  <!-- analytics -->
-  
 
-<meta name="generator" content="Hexo 5.3.0"></head>
-
-<body id="body" data-spy="scroll" data-target=".toc">
-  <div class="container" id="container">
-	<div class="content">
-	  <div class="page-header">		
-  <h1><a class="brand" href="/">人心不古</a><span class="split"></span><span class="title">TypeScript总结</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2020-12-29</span></h1>
-</div>		
-
-<div class="row page">
-  <!-- cols -->	
-  
-  
-
-  
-	<div class="col-md-12">
-	  
-
-	  <!-- content -->
-	  <span class="label label-danger">基础类型?</span>
+    <meta name="generator" content="Hexo 5.3.0"></head>
+    <body>
+        <div class="container">
+            <header>
+<div class="main">
+<div class="title">
+    <a href="#" class="logo">人心不古</a>
+</div>
+<div class="site-nav">
+    <ul id="menu" class="menu">
+    
+        <li class="menu-item text-underline">
+            <a href="/">Home</a>
+        </li>
+    
+        <li class="menu-item text-underline">
+            <a href="/archives">Archives</a>
+        </li>
+    
+        <li class="menu-item text-underline">
+            <a href="/about/">About</a>
+        </li>
+            
+    </ul>
+</div>
+</div>
+</header>
+            <main class="main">
+                <section class="posts clearfix">
+<div class="post-wrapper">
+    <article class="post article-entry">
+    <div class="post-title">
+        TypeScript总结
+    </div>
+    <p class="sub">Dec 29 2020</p>
+    <div class="post-content">
+        <span class="label label-danger">基础类型?</span>
 <p class="text-danger">为了让程序有价值，我们需要能够处理最简单的数据单元：数字，字符串，结构体，布尔值等。 TypeScript支持与JavaScript几乎相同的数据类型，此外还提供了实用的枚举类型方便我们使用。</p>
 <span class="label label-danger">布尔值</span>
 <p class="text-danger">最基本的数据类型就是简单的true/false值，在JavaScript和TypeScript里叫做boolean（其它语言中也一样）。</p>
@@ -202,105 +188,107 @@
 <p class="text-danger">两种形式是等价的。 至于使用哪个大多数情况下是凭个人喜好；然而，当你在TypeScript里使用JSX时，只有 as语法断言是被允许的。</p>
 
 <span class="label label-danger">关于let</span>
-<p class="text-danger">你可能已经注意到了，我们使用let关键字来代替大家所熟悉的JavaScript关键字var。 let关键字是JavaScript的一个新概念，TypeScript实现了它。 我们会在以后详细介绍它，很多常见的问题都可以通过使用 let来解决，所以尽可能地使用let来代替var吧。</p>	  
-
-	  <div>
-  		<center>
-		  <div class="pagination">
-<ul class="pagination">
-	
-	
-	
-	
-	
-	
-		
-			
-		
-	
-		
-			
-			
-		
-	
-		
-			
-			
-			
-		
-			
-		
-	
-		
-			
-		
-	
-		
-			
-		
-	
-	
-	
-		<li class="prev"><a href="/2020/12/29/TypeScript-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
-	
-	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
-	
-		<li class="next"><a href="/2020/12/28/class%E6%80%BB%E7%BB%93/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
-	
-</ul>
+<p class="text-danger">你可能已经注意到了，我们使用let关键字来代替大家所熟悉的JavaScript关键字var。 let关键字是JavaScript的一个新概念，TypeScript实现了它。 我们会在以后详细介绍它，很多常见的问题都可以通过使用 let来解决，所以尽可能地使用let来代替var吧。</p>
+    </div>
+    </article>
 </div>
 
-		</center>
-	  </div>
-	  
-	</div> <!-- col-md-9/col-md-12 -->
-	
-  </div><!-- row -->
+    <div class="_toc">
+        <strong class="toc-title">
+        Contents
+        </strong>
+        <div class="toc-content">
+            
+        </div>
+    </div>
 
-	</div>
+</section>
+
+
+    <nav class="post-nav">
+        
+            <div class="page-tags">
+                
+            </div>
+        
+    </nav>
+
+
+
+    <nav class="paginator clearfix">
+        
+            <a class="prev" href="/2020/12/29/TypeScript-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E/">
+                <i class="iconfont icon-left"></i>
+                <span class="prev-text">TypeScript-变量声明</span>
+            </a>
+        
+        
+            <a class="next" href="/2020/12/28/class%E6%80%BB%E7%BB%93/">
+                
+                <span class="prev-text">class总结</span>
+                <i class="iconfont icon-right"></i>
+            </a>
+        
+    </nav>
+
+
+            </main>
+            <div class="copyright">
+  <div class="text">Powered By
+    <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/zjx137/hexo-theme-Tsu">Tsu</a> &copy 2019
   </div>
-  <div class="container-narrow">
-	<footer> <p>
-  &copy; 2020 John Doe
-  
-      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
-</p> </footer>
-  </div> <!-- container-narrow -->
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+</div>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.tableofcontents.min.js"></script>
-<script src="/js/tocgenerator.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+        </div>
+    <div class="back-to-top" id="back-to-top">
+            <i class="iconfont icon-up"></i>
+    </div>
+        
+    </body>
+    
+<script src="/js/jquery-3.3.1.min.js"></script>
 
+    
+<script src="/js/back-to-top.js"></script>
 
+    
+<script src="/js/scroll.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": { 
+        preferredFont: "TeX", 
+        availableFonts: ["STIX","TeX"], 
+        linebreaks: { automatic:true }, 
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) 
+    },
+    tex2jax: { 
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ], 
+        processEscapes: true, 
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {  
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, 
+        Macros: { href: "{}" } 
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-
-
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
-
-
-</body>
 </html>

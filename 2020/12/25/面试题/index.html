@@ -1,64 +1,53 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>hooks总结 | 人心不古</title>
-  <meta name="author" content="John Doe">
-  
-  <meta name="description" content="大部分 React 类组件可以保存状态，而函数组件不能？ 并且类组件具有生命周期，而函数组件却不能？React 早期版本，类组件可以通过继承PureComponent来优化一些不必要的渲染，相对于函数组件，React 官网没有提供对应的方法来缓存函数组件以减少一些不必要的渲染，直接 16.6 出来的">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="hooks总结"/>
-  <meta property="og:site_name" content="人心不古"/>
 
-  
-    <meta property="og:image" content=""/>
-  
+<title>hooks总结 | 人心不古</title>
 
-  
-    <link rel="alternative" href="/atom.xml" title="人心不古" type="application/atom+xml">
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-  
-  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
-  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" href="/styles/main.css">
 
-  <!-- analytics -->
-  
 
-<meta name="generator" content="Hexo 5.3.0"></head>
-
-<body id="body" data-spy="scroll" data-target=".toc">
-  <div class="container" id="container">
-	<div class="content">
-	  <div class="page-header">		
-  <h1><a class="brand" href="/">人心不古</a><span class="split"></span><span class="title">hooks总结</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2020-12-25</span></h1>
-</div>		
-
-<div class="row page">
-  <!-- cols -->	
-  
-  
-
-  
-	<div class="col-md-12">
-	  
-
-	  <!-- content -->
-	  <p>大部分 React 类组件可以保存状态，而函数组件不能？ 并且类组件具有生命周期，而函数组件却不能？<br>React 早期版本，类组件可以通过继承PureComponent来优化一些不必要的渲染，相对于函数组件，React 官网没有提供对应的方法来缓存函数组件以减少一些不必要的渲染，直接 16.6 出来的 React.memo函数。</p>
+    <meta name="generator" content="Hexo 5.3.0"></head>
+    <body>
+        <div class="container">
+            <header>
+<div class="main">
+<div class="title">
+    <a href="#" class="logo">人心不古</a>
+</div>
+<div class="site-nav">
+    <ul id="menu" class="menu">
+    
+        <li class="menu-item text-underline">
+            <a href="/">Home</a>
+        </li>
+    
+        <li class="menu-item text-underline">
+            <a href="/archives">Archives</a>
+        </li>
+    
+        <li class="menu-item text-underline">
+            <a href="/about/">About</a>
+        </li>
+            
+    </ul>
+</div>
+</div>
+</header>
+            <main class="main">
+                <section class="posts clearfix">
+<div class="post-wrapper">
+    <article class="post article-entry">
+    <div class="post-title">
+        hooks总结
+    </div>
+    <p class="sub">Dec 25 2020</p>
+    <div class="post-content">
+        <p>大部分 React 类组件可以保存状态，而函数组件不能？ 并且类组件具有生命周期，而函数组件却不能？<br>React 早期版本，类组件可以通过继承PureComponent来优化一些不必要的渲染，相对于函数组件，React 官网没有提供对应的方法来缓存函数组件以减少一些不必要的渲染，直接 16.6 出来的 React.memo函数。</p>
 <p>React 16.8 新出来的Hook可以让React 函数组件具有状态，并提供类似 componentDidMount和componentDidUpdate,componentunMount等生命周期方法。</p>
 <p>类被会替代吗？<br>Hooks不会替换类，它们只是一个你可以使用的新工具。React 团队表示他们没有计划在React中弃用类，所以如果你想继续使用它们，可以继续用。<br>基础的Hook目前有三个先介绍一下</p>
 <p>1:useState 2:useEffect 3:useContext</p>
@@ -101,105 +90,107 @@
 <p>请记住，当 ref 对象内容发生变化时，useRef 并不会通知你。变更 .current 属性不会引发组件重新渲染。如果想要在 React 绑定或解绑 DOM 节点的 ref 时运行某些代码，则需要使用回调 ref 来实现。</p>
 <p>useImperativeHandle<br>useImperativeHandle(ref, createHandle, [deps])<br>useImperativeHandle 可以让你在使用 ref 时自定义暴露给父组件的实例值。在大多数情况下，应当避免使用 ref 这样的命令式代码。useImperativeHandle 应当与 forwardRef 一起使用：</p>
 <p>function FancyInput(props, ref) {<br>  const inputRef = useRef();<br>  useImperativeHandle(ref, () =&gt; ({<br>    focus: () =&gt; {<br>      inputRef.current.focus();<br>    }<br>  }));<br>  return &lt;input ref={inputRef} … /&gt;;<br>}<br>FancyInput = forwardRef(FancyInput);<br>在本例中，渲染 <FancyInput ref={inputRef} /> 的父组件可以调用 inputRef.current.focus()。</p>
-	  
 
-	  <div>
-  		<center>
-		  <div class="pagination">
-<ul class="pagination">
-	
-	
-	
-	
-	
-	
-		
-			
-		
-	
-		
-			
-		
-	
-		
-			
-		
-	
-		
-			
-			
-		
-	
-		
-			
-			
-			
-		
-			
-		
-	
-	
-	
-		<li class="prev"><a href="/2020/12/28/class%E6%80%BB%E7%BB%93/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
-	
-	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
-	
-		<li class="next"><a href="/2020/12/25/test/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
-	
-</ul>
+    </div>
+    </article>
 </div>
 
-		</center>
-	  </div>
-	  
-	</div> <!-- col-md-9/col-md-12 -->
-	
-  </div><!-- row -->
+    <div class="_toc">
+        <strong class="toc-title">
+        Contents
+        </strong>
+        <div class="toc-content">
+            
+        </div>
+    </div>
 
-	</div>
+</section>
+
+
+    <nav class="post-nav">
+        
+            <div class="page-tags">
+                
+            </div>
+        
+    </nav>
+
+
+
+    <nav class="paginator clearfix">
+        
+            <a class="prev" href="/2020/12/28/class%E6%80%BB%E7%BB%93/">
+                <i class="iconfont icon-left"></i>
+                <span class="prev-text">class总结</span>
+            </a>
+        
+        
+            <a class="next" href="/2020/12/25/test/">
+                
+                <span class="prev-text">test</span>
+                <i class="iconfont icon-right"></i>
+            </a>
+        
+    </nav>
+
+
+            </main>
+            <div class="copyright">
+  <div class="text">Powered By
+    <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/zjx137/hexo-theme-Tsu">Tsu</a> &copy 2019
   </div>
-  <div class="container-narrow">
-	<footer> <p>
-  &copy; 2020 John Doe
-  
-      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
-</p> </footer>
-  </div> <!-- container-narrow -->
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+</div>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.tableofcontents.min.js"></script>
-<script src="/js/tocgenerator.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+        </div>
+    <div class="back-to-top" id="back-to-top">
+            <i class="iconfont icon-up"></i>
+    </div>
+        
+    </body>
+    
+<script src="/js/jquery-3.3.1.min.js"></script>
 
+    
+<script src="/js/back-to-top.js"></script>
 
+    
+<script src="/js/scroll.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+    <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": { 
+        preferredFont: "TeX", 
+        availableFonts: ["STIX","TeX"], 
+        linebreaks: { automatic:true }, 
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) 
+    },
+    tex2jax: { 
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ], 
+        processEscapes: true, 
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {  
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, 
+        Macros: { href: "{}" } 
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-
-
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
-
-
-</body>
 </html>
